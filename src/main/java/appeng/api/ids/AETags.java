@@ -27,6 +27,7 @@ import net.fabricmc.fabric.api.tag.TagFactory;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.Tag;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.material.Fluid;
 
@@ -86,6 +87,10 @@ public final class AETags {
 
     private static Tag.Named<Block> blockTag(String name) {
         return TagFactory.BLOCK.create(new ResourceLocation(name));
+    }
+
+    private static Tag.Named<Biome> biomeTag(String name) {
+        return TagFactory.BIOME.create(new ResourceLocation(name));
     }
 
 }
