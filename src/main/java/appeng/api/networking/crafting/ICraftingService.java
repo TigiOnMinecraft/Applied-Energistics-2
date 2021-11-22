@@ -37,7 +37,6 @@ import net.minecraft.world.level.Level;
 import appeng.api.crafting.IPatternDetails;
 import appeng.api.networking.IGridService;
 import appeng.api.networking.security.IActionSource;
-import appeng.api.storage.IStorageChannel;
 import appeng.api.storage.data.AEKey;
 
 public interface ICraftingService extends IGridService {
@@ -111,7 +110,7 @@ public interface ICraftingService extends IGridService {
     /**
      * Get the set of things that can be crafted for a given storage channel.
      */
-    <T extends AEKey> Set<T> getCraftables(IStorageChannel<T> channel);
+    Set<AEKey> getCraftables();
 
     /**
      * is this item being crafted?

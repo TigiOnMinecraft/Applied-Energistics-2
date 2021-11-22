@@ -24,7 +24,6 @@
 package appeng.api.networking.crafting;
 
 import appeng.api.crafting.IPatternDetails;
-import appeng.api.storage.data.AEKey;
 import appeng.api.storage.data.KeyCounter;
 
 /**
@@ -42,7 +41,7 @@ public interface ICraftingMedium {
      *
      * @return if the pattern was successfully pushed.
      */
-    boolean pushPattern(IPatternDetails patternDetails, KeyCounter<AEKey>[] inputHolder);
+    boolean pushPattern(IPatternDetails patternDetails, KeyCounter[] inputHolder);
 
     /**
      * @return if this is false, the crafting engine will refuse to send new jobs to this medium.

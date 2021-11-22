@@ -60,7 +60,6 @@ import appeng.api.networking.events.GridCraftingPatternChange;
 import appeng.api.networking.security.IActionSource;
 import appeng.api.networking.storage.IStorageService;
 import appeng.api.storage.GenericStack;
-import appeng.api.storage.IStorageChannel;
 import appeng.api.storage.data.AEKey;
 import appeng.api.storage.data.KeyCounter;
 import appeng.blockentity.crafting.CraftingBlockEntity;
@@ -105,7 +104,7 @@ public class CraftingService implements ICraftingService, IGridServiceProvider, 
     /**
      * Used for looking up craftable alternatives using fuzzy search (i.e. ignore NBT).
      */
-    private final KeyCounter<AEKey> craftableItemsList = new KeyCounter<>();
+    private final KeyCounter craftableItemsList = new KeyCounter();
     private final Set<AEKey> emitableItems = new HashSet<>();
     private final Map<String, CraftingLinkNexus> craftingLinks = new HashMap<>();
     private final Multimap<AEKey, CraftingWatcher> interests = HashMultimap.create();
@@ -195,22 +194,10 @@ public class CraftingService implements ICraftingService, IGridServiceProvider, 
     }
 
     @Override
-    public <T extends AEKey> Set<T> getCraftables(IStorageChannel<T> channel) {
-        var result = new HashSet<T>();
-
-        // add craftable items!
-        for (var stack : this.craftableItems.keySet()) {
-            if (stack.getChannel() == channel) {
-                result.add(stack.cast(channel));
-            }
-        }
-
-        for (var stack : this.emitableItems) {
-            if (stack.getChannel() == channel) {
-                result.add(stack.cast(channel));
-            }
-        }
-
+    public Set<AEKey> getCraftables() {
+        var result = new HashSet<AEKey>();
+        result.addAll(this.craftableItems.keySet());
+        result.addAll(this.emitableItems);
         return result;
     }
 
